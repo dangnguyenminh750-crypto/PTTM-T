@@ -1,0 +1,2064 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vạn Lộc Coffee & Tea - Trang chủ</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2e7d32;         /* Xanh lá nông sản sạch */
+            --primary-hover: #236328;
+            --primary-light: #e8f5e9;
+            --accent: #6d4c41;          /* Nâu cà phê mộc */
+            --accent-hover: #543830;
+            --accent-light: #efebe9;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --border: #e2e8f0;
+            --star: #f59e0b;
+            --danger: #ef4444;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.22);
+            --transition: all 0.28s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 1. TOP BAR & HEADER */
+        .top-bar {
+            background: #1b4d24;
+            color: #ffffff;
+            font-size: 0.85rem;
+            padding: 9px 0;
+        }
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 16px;
+        }
+
+        header {
+            background: #ffffff;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-main {
+            padding: 18px 0;
+        }
+        .header-main .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo-text h1 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+        }
+        .logo-text span {
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        /* Menu điều hướng chính */
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+        .main-nav > li {
+            position: relative;
+            padding: 8px 0;
+        }
+        .main-nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .main-nav a:hover, .main-nav a.active, .main-nav > li:hover > a {
+            color: var(--primary);
+        }
+        .nav-caret {
+            font-size: 0.72rem;
+            margin-left: 4px;
+            transition: transform 0.25s ease;
+        }
+        .main-nav > li:hover .nav-caret {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu Cửa Hàng (Hiển thị phân cấp danh mục) */
+        .has-dropdown::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 18px;
+        }
+        .shop-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: -40px;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+            border: 1px solid #e2e8f0;
+            padding: 22px 24px;
+            display: grid;
+            grid-template-columns: 210px 220px;
+            gap: 22px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+            min-width: 460px;
+        }
+        .has-dropdown:hover .shop-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-category-col {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .dropdown-cat-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--accent);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .dropdown-cat-title i {
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+        .dropdown-sub-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0;
+            margin: 0;
+        }
+        .dropdown-sub-list li a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            color: #334155;
+            font-size: 0.88rem;
+            font-weight: 500;
+            text-transform: none;
+            transition: all 0.2s ease;
+        }
+        .dropdown-sub-list li a i {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            transition: transform 0.2s ease;
+        }
+        .dropdown-sub-list li a:hover {
+            background: #f0fdf4;
+            color: var(--primary);
+            padding-left: 14px;
+        }
+        .dropdown-sub-list li a:hover i {
+            color: var(--primary);
+            transform: translateX(3px);
+        }
+
+        /* Thanh tìm kiếm Header */
+        .search-box {
+            flex: 1;
+            max-width: 420px;
+            position: relative;
+        }
+        .search-form {
+            display: flex;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+        .search-form input {
+            flex: 1;
+            border: none;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .search-form button {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .search-form button:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Hotline & Giỏ hàng */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+        .hotline-widget {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        .hotline-widget i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+        .hotline-widget span {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            display: block;
+        }
+        .hotline-widget strong {
+            font-size: 0.96rem;
+            color: var(--accent);
+        }
+        .cart-btn {
+            position: relative;
+            background: var(--primary-light);
+            color: var(--primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .cart-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--danger);
+            color: #ffffff;
+            font-size: 0.74rem;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        /* ==============================================================
+           2. SECTION TRÀN VIỀN TOÀN MÀN HÌNH (FULL WIDTH)
+              NỘI DUNG ĐƯỢC CHĂM CHÚT CĂN ĐỀU, HÀI HÒA & ĐẸP MẮT
+           ============================================================== */
+        .hero-fullwidth-section {
+            width: 100%;
+            margin: 0 0 50px 0;
+            background: linear-gradient(135deg, rgba(18, 44, 22, 0.94) 0%, rgba(42, 24, 18, 0.94) 100%),
+                        url('https://vanloccoffee.com/wp-content/uploads/2024/11/adult-harvesting-coffee-1.webp') center/cover no-repeat;
+            padding: 65px 0 70px 0;
+            color: #ffffff;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+            position: relative;
+            border-bottom: 4px solid #83431b;
+        }
+
+        .hero-wide-container {
+            max-width: 1480px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .hero-split-grid {
+            display: grid;
+            grid-template-columns: 0.92fr 1.38fr;
+            gap: 36px;
+            align-items: center;
+        }
+
+        /* CỘT BÊN TRÁI: NỘI DUNG CĂN ĐỀU, HÀI HÒA VÀ ĐẸP MẮT */
+        .hero-content-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(250, 204, 21, 0.16);
+            backdrop-filter: blur(8px);
+            padding: 7px 18px;
+            border-radius: 30px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            width: fit-content;
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            letter-spacing: 0.8px;
+            color: #facc15;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            margin: 0;
+            line-height: 1.24;
+        }
+        .hero-title-main {
+            display: block;
+            font-size: 2.22rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+        .hero-title-sub {
+            display: block;
+            font-size: 2.22rem;
+            font-weight: 800;
+            color: #facc15;
+            letter-spacing: -0.5px;
+            margin-top: 4px;
+            text-shadow: 0 3px 14px rgba(250, 204, 21, 0.35);
+        }
+
+        /* Khung trích dẫn cam kết: Căn đều, sang trọng chuẩn typography */
+        .hero-quote-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-left: 5px solid #facc15;
+            padding: 20px 24px;
+            border-radius: 0 14px 14px 0;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+        }
+        .quote-icon {
+            font-size: 1.25rem;
+            color: #facc15;
+            opacity: 0.85;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .hero-quote-text {
+            font-size: 1.08rem;
+            font-style: italic;
+            color: #fef9c3;
+            line-height: 1.68;
+            margin: 0;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Cặp nút CTA nổi bật */
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .btn-cta-primary {
+            background: #facc15;
+            color: #1e293b;
+            padding: 15px 32px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.02rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.45);
+            transition: var(--transition);
+        }
+        .btn-cta-primary:hover {
+            transform: translateY(-2px);
+            background: #eab308;
+            box-shadow: 0 10px 26px rgba(250, 204, 21, 0.55);
+        }
+        .btn-cta-outline {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            padding: 14px 28px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.02rem;
+            backdrop-filter: blur(6px);
+            transition: var(--transition);
+        }
+        .btn-cta-outline:hover {
+            background: #ffffff;
+            color: var(--accent);
+        }
+
+        /* CỘT BÊN PHẢI: VIDEO CLIP TO RỘNG SẮC NÉT */
+        .hero-video-col {
+            position: relative;
+            width: 100%;
+        }
+        .video-player-wrapper {
+            position: relative;
+            background: #000000;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.65);
+            border: 3px solid rgba(255, 255, 255, 0.25);
+            aspect-ratio: 16 / 9;
+            min-height: 410px;
+        }
+        .brand-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+        .video-badge {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background: rgba(234, 88, 12, 0.95);
+            color: #ffffff;
+            font-size: 0.88rem;
+            font-weight: 700;
+            padding: 7px 16px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(6px);
+            z-index: 2;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+        }
+        .video-caption {
+            margin-top: 14px;
+            font-size: 0.98rem;
+            color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .video-caption i {
+            color: #facc15;
+            font-size: 1.15rem;
+        }
+
+        /* 3. THANH CAM KẾT DỊCH VỤ */
+        .trust-bar {
+            background: #ffffff;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 45px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .trust-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            flex-shrink: 0;
+        }
+        .trust-text strong {
+            display: block;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+        .trust-text span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ==============================================================
+           4. KHU VỰC DANH MỤC TRANG CHỦ (Y CHANG WEB GỐC VẠN LỘC COFFEE)
+           ============================================================== */
+        .section-categories-original {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 45px 35px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 50px;
+            border: 1px solid var(--border);
+        }
+        .cat-header {
+            text-align: center;
+            max-width: 820px;
+            margin: 0 auto 38px auto;
+        }
+        .cat-header h2 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #83431b;
+            margin-bottom: 12px;
+            text-transform: capitalize;
+        }
+        .cat-header p {
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Lưới 4 danh mục theo mẫu gốc */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .category-box-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .category-box-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .cat-img-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f8fafc;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cat-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .category-box-item:hover .cat-img-wrapper img {
+            transform: scale(1.08);
+        }
+        .cat-title-wrapper {
+            padding: 18px 12px;
+            width: 100%;
+            background: #ffffff;
+        }
+        .cat-title-wrapper h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.25s ease;
+        }
+        .category-box-item:hover .cat-title-wrapper h3 {
+            color: var(--primary);
+        }
+
+        /* 5. KHU VỰC FLASH SALE GIỜ VÀNG */
+        .section-flash-sale {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            border: 2px solid #fed7aa;
+        }
+        .sale-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 26px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .sale-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sale-title h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #c2410c;
+        }
+        .sale-tag {
+            background: #fee2e2;
+            color: var(--danger);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .countdown-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .countdown-box {
+            background: #1e293b;
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 6px;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        .sale-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+        .card-discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--danger);
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            z-index: 2;
+        }
+        .card-img-wrap {
+            position: relative;
+            background: #f1f5f9;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .card-img-wrap img {
+            transform: scale(1.06);
+        }
+        .card-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .card-category {
+            font-size: 0.76rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .card-title {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 2.7em;
+        }
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.8rem;
+            color: var(--star);
+            margin-bottom: 10px;
+        }
+        .card-rating span {
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+        .card-price-row {
+            margin-top: auto;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .current-price {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .old-price {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .stock-progress {
+            margin-bottom: 14px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #fed7aa;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #ea580c;
+            border-radius: 10px;
+        }
+        .progress-text {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-quick-add {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1.5px solid var(--primary);
+            padding: 10px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .btn-quick-add:hover {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        /* ==============================================================
+           5.1 KHU VỰC BLOG & GÓC TƯ VẤN KIẾN THỨC CÀ PHÊ (ĐẶT DƯỚI FLASH SALE)
+           ============================================================== */
+        .section-blog {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            padding: 42px 36px;
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
+        .blog-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .blog-header-left {
+            max-width: 680px;
+        }
+        .blog-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .blog-header h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin: 0 0 8px 0;
+            line-height: 1.25;
+        }
+        .blog-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+        .btn-view-all-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            padding: 10px 20px;
+            border: 1.5px solid var(--primary);
+            border-radius: 25px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-view-all-blog:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateX(3px);
+        }
+
+        /* Lưới bài viết Blog */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+        }
+        .blog-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            text-decoration: none;
+            color: inherit;
+        }
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        .blog-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 210px;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        .blog-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+        .blog-card:hover .blog-img-wrap img {
+            transform: scale(1.08);
+        }
+        .blog-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(30, 86, 49, 0.92);
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .blog-body {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+        .blog-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .blog-title {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.45;
+            margin: 0 0 10px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.2s ease;
+        }
+        .blog-card:hover .blog-title {
+            color: var(--primary);
+        }
+        .blog-excerpt {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0 0 16px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex: 1;
+        }
+        .blog-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .blog-footer i {
+            transition: transform 0.2s ease;
+        }
+        .blog-card:hover .blog-footer i {
+            transform: translateX(4px);
+        }
+
+        /* 6. BANNER BẢN TIN VÀ CHÂN TRANG */
+        .newsletter-bar {
+            background: linear-gradient(135deg, var(--accent), #4e342e);
+            border-radius: var(--radius-lg);
+            padding: 38px 42px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .newsletter-text h3 {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+        .newsletter-text p {
+            color: #d7ccc8;
+            font-size: 0.92rem;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            max-width: 440px;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 13px 20px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 0.92rem;
+        }
+        .newsletter-form button {
+            background: #facc15;
+            color: #1e293b;
+            border: none;
+            padding: 0 24px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-form button:hover {
+            background: #eab308;
+        }
+
+        /* ==============================================================
+           7. FOOTER CHÂN TRANG ĐẸP CHUẨN THƯƠNG HIỆU VẠN LỘC COFFEE & TEA
+           ============================================================== */
+        .site-footer {
+            background: linear-gradient(180deg, #241c1a 0%, #151110 100%);
+            color: #cbd5e1;
+            padding: 65px 0 0 0;
+            border-top: 4px solid #83431b;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.85fr 1fr 1.2fr;
+            gap: 36px;
+            padding-bottom: 45px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 1.12rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: #facc15;
+            border-radius: 2px;
+        }
+        
+        /* Cột 1: Logo & Thông tin công ty */
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .footer-logo img {
+            height: 48px;
+            width: auto;
+        }
+        .footer-logo h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.1;
+        }
+        .footer-logo span {
+            font-size: 0.72rem;
+            color: #facc15;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .footer-about {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .company-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+        }
+        .company-meta strong {
+            color: #facc15;
+        }
+        .company-meta i {
+            color: #facc15;
+            width: 18px;
+        }
+        .footer-socials {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .footer-social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.95rem;
+        }
+        .footer-social-btn:hover {
+            background: #facc15;
+            color: #1e293b;
+            transform: translateY(-3px);
+            border-color: #facc15;
+        }
+
+        /* Cột 2: Liên kết nhanh */
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            font-size: 0.92rem;
+        }
+        .footer-links a i {
+            font-size: 0.72rem;
+            color: #facc15;
+            transition: transform 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: #facc15;
+            padding-left: 6px;
+        }
+        .footer-links a:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Cột 3: Giờ mở cửa & Liên hệ */
+        .hours-badge {
+            background: rgba(250, 204, 21, 0.12);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 18px;
+        }
+        .hours-badge p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #fef08a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hours-badge span {
+            display: block;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            margin-top: 4px;
+            padding-left: 24px;
+        }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        .footer-contact-item i {
+            color: #facc15;
+            font-size: 1.1rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+        .footer-contact-item a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer-contact-item a:hover {
+            color: #facc15;
+        }
+
+        /* Cột 4: Bản đồ Google Maps */
+        .map-wrapper {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background: #1e293b;
+        }
+        .map-iframe {
+            width: 100%;
+            height: 180px;
+            border: none;
+            display: block;
+        }
+        .map-card-info {
+            padding: 10px 14px;
+            background: rgba(30, 41, 59, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .map-card-text {
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            line-height: 1.35;
+        }
+        .map-card-text strong {
+            display: block;
+            color: #facc15;
+        }
+        .map-direct-btn {
+            background: #facc15;
+            color: #1e293b;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .map-direct-btn:hover {
+            background: #eab308;
+            transform: translateY(-2px);
+        }
+
+        /* Dải chân trang bản quyền cuối cùng */
+        .footer-bottom {
+            padding: 22px 0;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .footer-bottom-badges {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            color: #cbd5e1;
+        }
+        .footer-badge-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82rem;
+        }
+        .footer-badge-item i {
+            color: #4ade80;
+        }
+
+        /* Responsive Mobile & Tablet */
+        @media (max-width: 1024px) {
+            .hero-split-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .video-player-wrapper {
+                min-height: 320px;
+            }
+            .hero-title-main {
+                white-space: normal;
+                font-size: 1.85rem;
+                letter-spacing: -0.3px;
+            }
+            .hero-title-sub {
+                font-size: 1.85rem;
+                letter-spacing: -0.3px;
+            }
+            .trust-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .sale-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-nav {
+                display: none;
+            }
+            .newsletter-bar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .newsletter-form {
+                width: 100%;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+        @media (max-width: 600px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+            .footer-bottom-badges {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .hero-fullwidth-section {
+                padding: 45px 0 50px 0;
+            }
+            .hero-wide-container {
+                padding: 0 20px;
+            }
+            .hero-title {
+                font-size: 1.95rem;
+            }
+            .hero-quote-text {
+                font-size: 0.98rem;
+            }
+            .btn-cta-primary, .btn-cta-outline {
+                width: 100%;
+                justify-content: center;
+            }
+            .video-player-wrapper {
+                min-height: 230px;
+            }
+            .trust-bar {
+                grid-template-columns: 1fr;
+            }
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+            .sale-grid {
+                grid-template-columns: 1fr;
+            }
+            .search-box {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOP BAR & HEADER -->
+    <div class="top-bar">
+        <div class="container">
+            <div><i class="fa-solid fa-truck-fast"></i> Miễn phí giao hàng toàn quốc cho đơn từ <strong>300.000 ₫</strong></div>
+            <div>
+                <a href="tel:0967918897"><i class="fa-solid fa-phone"></i> Hotline: 0967.918.897</a>
+                <a href="#"><i class="fa-solid fa-user"></i> Tài khoản</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-main">
+            <div class="container">
+                <!-- Logo Vạn Lộc -->
+                <a href="#" class="logo">
+                    <img class="logo-img" src="https://vanloccoffee.com/wp-content/uploads/2024/12/Logo-Vanloc.png" alt="Vạn Lộc Coffee & Tea">
+                    <div class="logo-text">
+                        <h1>VẠN LỘC</h1>
+                        <span>Coffee & Tea</span>
+                    </div>
+                </a>
+
+                <!-- Menu điều hướng chính -->
+                <ul class="main-nav">
+                    <li><a href="#" class="active">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Cửa hàng <i class="fa-solid fa-chevron-down nav-caret"></i></a>
+                        <!-- Dropdown Menu hiển thị phân cấp danh mục -->
+                        <div class="shop-dropdown-menu">
+                            <!-- Danh mục nhỏ 1: Loại Cà Phê -->
+                            <div class="dropdown-category-col">
+                                <div class="dropdown-cat-title">
+                                    <i class="fa-solid fa-mug-hot"></i>
+                                    <span>Loại Cà Phê</span>
+                                </div>
+                                <ul class="dropdown-sub-list">
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Cà phê pha máy</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Cà phê bột pha phin</a></li>
+                                </ul>
+                            </div>
+                            <!-- Danh mục nhỏ 2: Trà Xanh Thái Nguyên -->
+                            <div class="dropdown-category-col">
+                                <div class="dropdown-cat-title">
+                                    <i class="fa-solid fa-leaf"></i>
+                                    <span>Trà Xanh Thái Nguyên</span>
+                                </div>
+                                <ul class="dropdown-sub-list">
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Đặc Biệt</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Cao Cấp</a></li>
+                                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Hảo Hạng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Đối tác sỉ</a></li>
+                    <li><a href="#">Góc tư vấn</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+
+                <!-- Thanh tìm kiếm -->
+                <div class="search-box">
+                    <form class="search-form" action="#" method="GET">
+                        <input type="text" placeholder="Bạn cần tìm sản phẩm...">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+
+                <!-- Giỏ hàng -->
+                <div class="header-actions">
+                    <a href="#" class="cart-btn" onclick="alert('Xem giỏ hàng!')">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-badge" id="cartCount">2</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==============================================================
+         2. SECTION TRÀN VIỀN TOÀN MÀN HÌNH (FULL-WIDTH 100%)
+            NỘI DUNG ĐƯỢC CHĂM CHÚT CĂN ĐỀU, HÀI HÒA & ĐẸP MẮT
+         ============================================================== -->
+    <section class="hero-fullwidth-section">
+        <div class="hero-wide-container">
+            <div class="hero-split-grid">
+                
+                <!-- BÊN TRÁI: NỘI DUNG CHỮ CĂN ĐỀU, NHỊP NHÀNG & ĐẸP MẮT -->
+                <div class="hero-content-col">
+                    <div class="hero-tag">
+                        <i class="fa-solid fa-seedling"></i> GIÁ TRỊ CỐT LÕI &bull; CÀ PHÊ RANG MỘC
+                    </div>
+                    
+                    <h2 class="hero-title">
+                        <span class="hero-title-main">Gắn Kết Người Việt Qua Ly Cà Phê</span>
+                        <span class="hero-title-sub">Chuẩn Vị Đậm Đà</span>
+                    </h2>
+                    
+                    <!-- Khung trích dẫn cam kết cân đối, căn đều đẹp -->
+                    <div class="hero-quote-card">
+                        <i class="fa-solid fa-quote-left quote-icon"></i>
+                        <p class="hero-quote-text">
+                            “Không chỉ sản xuất kinh doanh cà phê mà chúng tôi còn muốn xây dựng một văn hóa Cà Phê sạch, nơi mọi người đều có thể an tâm về những gì mình thưởng thức.”
+                        </p>
+                    </div>
+                    
+                    <!-- Cặp nút CTA nổi bật -->
+                    <div class="hero-cta-group">
+                        <a href="#flash-sale" class="btn-cta-primary">
+                            <i class="fa-solid fa-bolt"></i> Mua Ngay - Giảm Đến 25%
+                        </a>
+                        <a href="#kham-pha-san-pham" class="btn-cta-outline">
+                            <i class="fa-solid fa-list-check"></i> Khám Phá Danh Mục
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BÊN PHẢI: CLIP VIDEO TO RỘNG, SẮC NÉT (LẤY TỪ WEB GỐC) -->
+                <div class="hero-video-col">
+                    <div class="video-player-wrapper">
+                        <!-- Video clip gốc từ vanloccoffee.com: Tự động chạy, lặp lại vô tận, không hiển thị thanh điều khiển -->
+                        <video class="brand-video" autoplay muted loop playsinline poster="https://vanloccoffee.com/wp-content/uploads/2024/11/Untitled-1920-x-1000-px.webp">
+                            <source src="https://vanloccoffee.com/wp-content/uploads/2024/11/Untitled-design-4.webm" type="video/webm">
+                            <source src="https://vanloccoffee.com/wp-content/uploads/2024/11/Untitled-design-4.webm" type="video/mp4">
+                            Trình duyệt của bạn không hỗ trợ thẻ video.
+                        </video>
+                    </div>
+                    <div class="video-caption">
+                        <i class="fa-solid fa-fire-burner"></i> Quy trình sản xuất & rang xay cà phê mộc công nghệ Hot-Air
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- 3. THANH CAM KẾT DỊCH VỤ (TRUST BAR) -->
+        <section class="trust-bar">
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-seedling"></i></div>
+                <div class="trust-text">
+                    <strong>100% Nguyên chất</strong>
+                    <span>Không pha bắp, đậu nành</span>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <div class="trust-text">
+                    <strong>Giao hàng 2 Giờ</strong>
+                    <span>Hỏa tốc khu vực nội thành</span>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                <div class="trust-text">
+                    <strong>Đổi trả 7 ngày</strong>
+                    <span>Hoàn tiền nếu không hài lòng</span>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="trust-text">
+                    <strong>Rang Hot-Air mộc</strong>
+                    <span>Chuẩn gu cà phê hiện đại</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================================
+             4. KHU VỰC DANH MỤC TRANG CHỦ (Y CHANG WEB GỐC VẠN LỘC COFFEE)
+             ============================================================== -->
+        <section class="section-categories-original" id="kham-pha-san-pham">
+            <div class="cat-header">
+                <h2>Khám phá sản phẩm</h2>
+                <p>Chúng tôi mong rằng <strong>Vạn Lộc Coffee &amp; Tea</strong> sẽ là người bạn đồng hành của mỗi người Việt, mang đến trải nghiệm thưởng thức Cà Phê sạch, Cà Phê chất lượng cao chuẩn vị ngay trong lòng Việt Nam.</p>
+            </div>
+
+            <!-- 4 thẻ danh mục chuẩn website gốc -->
+            <div class="categories-grid">
+                <!-- Danh mục 1: Cà phê pha máy -->
+                <a href="#" class="category-box-item">
+                    <div class="cat-img-wrapper">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/11/50-300x300.webp" alt="Cà Phê Pha Máy" loading="lazy">
+                    </div>
+                    <div class="cat-title-wrapper">
+                        <h3>Cà Phê Pha Máy</h3>
+                    </div>
+                </a>
+
+                <!-- Danh mục 2: Cà phê đặc biệt -->
+                <a href="#" class="category-box-item">
+                    <div class="cat-img-wrapper">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2025/02/Ca-Phe-Dac-San-Premium-ARA-Hop-Lon-–-VLDS02-200g-300x300.jpg" alt="Cà Phê Đặc Biệt" loading="lazy">
+                    </div>
+                    <div class="cat-title-wrapper">
+                        <h3>Cà Phê Đặc Biệt</h3>
+                    </div>
+                </a>
+
+                <!-- Danh mục 3: Cà phê pha phin -->
+                <a href="#" class="category-box-item">
+                    <div class="cat-img-wrapper">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/11/51-300x300.webp" alt="Cà Phê Pha Phin" loading="lazy">
+                    </div>
+                    <div class="cat-title-wrapper">
+                        <h3>Cà Phê Pha Phin</h3>
+                    </div>
+                </a>
+
+                <!-- Danh mục 4: Trà xanh Thái Nguyên -->
+                <a href="#" class="category-box-item">
+                    <div class="cat-img-wrapper">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/11/49-300x300.webp" alt="Trà Xanh Thái Nguyên" loading="lazy">
+                    </div>
+                    <div class="cat-title-wrapper">
+                        <h3>Trà Xanh Thái Nguyên</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 5. KHU VỰC FLASH SALE GIỜ VÀNG -->
+        <section class="section-flash-sale" id="flash-sale">
+            <div class="sale-header">
+                <div class="sale-title">
+                    <i class="fa-solid fa-bolt-lightning fa-2x" style="color: #ea580c;"></i>
+                    <div>
+                        <h2>FLASH SALE GIỜ VÀNG</h2>
+                        <span class="sale-tag">Chỉ áp dụng hôm nay</span>
+                    </div>
+                </div>
+                <!-- Đồng hồ đếm ngược -->
+                <div class="countdown-timer">
+                    <span>Kết thúc sau:</span>
+                    <div class="countdown-box" id="hours">04</div> :
+                    <div class="countdown-box" id="minutes">32</div> :
+                    <div class="countdown-box" id="seconds">45</div>
+                </div>
+            </div>
+
+            <!-- Lưới sản phẩm Flash Sale có nút thêm nhanh -->
+            <div class="sale-grid">
+                <!-- SP 1 -->
+                <div class="product-card">
+                    <span class="card-discount">-15%</span>
+                    <div class="card-img-wrap">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/12/Ban-sao-cua-Coffee-6-400x400.jpg" alt="VLP04">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category">Cà phê pha phin</span>
+                        <h3 class="card-title">Cà Phê Phin Tinh Túy VLP04 Gu Đậm Đà (900g)</h3>
+                        <div class="card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>(48)</span>
+                        </div>
+                        <div class="card-price-row">
+                            <span class="current-price">365.000 ₫</span>
+                            <span class="old-price">430.000 ₫</span>
+                        </div>
+                        <div class="stock-progress">
+                            <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                            <div class="progress-text"><span>Đã bán 16/20</span><span>Cháy hàng</span></div>
+                        </div>
+                        <button class="btn-quick-add" onclick="addToCart('Cà Phê Phin Tinh Túy VLP04')">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm nhanh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SP 2 -->
+                <div class="product-card">
+                    <span class="card-discount">-20%</span>
+                    <div class="card-img-wrap">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/11/Ban-sao-cua-Coffee-400x400.jpg" alt="VLM04">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category">Cà phê pha máy</span>
+                        <h3 class="card-title">Essence Espresso VLM04 Gu Tinh Túy (450g)</h3>
+                        <div class="card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <span>(35)</span>
+                        </div>
+                        <div class="card-price-row">
+                            <span class="current-price">182.000 ₫</span>
+                            <span class="old-price">227.000 ₫</span>
+                        </div>
+                        <div class="stock-progress">
+                            <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                            <div class="progress-text"><span>Đã bán 12/20</span><span>Còn 8 gói</span></div>
+                        </div>
+                        <button class="btn-quick-add" onclick="addToCart('Essence Espresso VLM04')">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm nhanh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SP 3 -->
+                <div class="product-card">
+                    <span class="card-discount">-10%</span>
+                    <div class="card-img-wrap">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2025/02/Ca-Phe-Dac-San-Premium-ARA-Hop-Lon-–-VLDS02-200g-300x300.jpg" alt="VLDS02">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category">Cà phê đặc sản</span>
+                        <h3 class="card-title">Cà Phê Đặc Sản Premium Arabica Hộp Lon VLDS02</h3>
+                        <div class="card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>(21)</span>
+                        </div>
+                        <div class="card-price-row">
+                            <span class="current-price">270.000 ₫</span>
+                            <span class="old-price">300.000 ₫</span>
+                        </div>
+                        <div class="stock-progress">
+                            <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+                            <div class="progress-text"><span>Đã bán 9/20</span><span>Còn 11 hộp</span></div>
+                        </div>
+                        <button class="btn-quick-add" onclick="addToCart('Arabica Hộp Lon VLDS02')">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm nhanh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SP 4 -->
+                <div class="product-card">
+                    <span class="card-discount">-25%</span>
+                    <div class="card-img-wrap">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/11/49-300x300.webp" alt="Trà xanh">
+                    </div>
+                    <div class="card-body">
+                        <span class="card-category">Trà Thái Nguyên</span>
+                        <h3 class="card-title">Trà Xanh Thái Nguyên Cao Cấp Thượng Hạng</h3>
+                        <div class="card-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>(64)</span>
+                        </div>
+                        <div class="card-price-row">
+                            <span class="current-price">195.000 ₫</span>
+                            <span class="old-price">260.000 ₫</span>
+                        </div>
+                        <div class="stock-progress">
+                            <div class="progress-bar"><div class="progress-fill" style="width: 90%;"></div></div>
+                            <div class="progress-text"><span>Đã bán 18/20</span><span>Sắp hết</span></div>
+                        </div>
+                        <button class="btn-quick-add" onclick="addToCart('Trà Xanh Thái Nguyên')">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm nhanh
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================================
+             5.1 KHU VỰC BLOG & GÓC TƯ VẤN KIẾN THỨC CÀ PHÊ (ĐẶT DƯỚI FLASH SALE)
+             ============================================================== -->
+        <section class="section-blog" id="goc-tu-van">
+            <div class="blog-header">
+                <div class="blog-header-left">
+                    <span class="blog-badge"><i class="fa-solid fa-mug-saucer"></i> GÓC TƯ VẤN & BÍ QUYẾT PHA CHẾ</span>
+                    <h2>Khám Phá Hương Vị & Văn Hóa Cà Phê Việt</h2>
+                    <p>Chia sẻ kinh nghiệm thưởng thức cà phê sạch nguyên chất, cẩm nang pha chế và câu chuyện đằng sau từng hạt mộc Vạn Lộc.</p>
+                </div>
+                <a href="#" class="btn-view-all-blog">
+                    Xem tất cả bài viết <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Lưới 3 bài viết nổi bật chuẩn dữ liệu web gốc vanloccoffee.com -->
+            <div class="blog-grid">
+                
+                <!-- Bài 1 -->
+                <a href="#" class="blog-card">
+                    <div class="blog-img-wrap">
+                        <span class="blog-tag">Bí quyết pha chế</span>
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2026/07/1b034a76-6de8-4863-977a-84c838308ec1-300x200.png" alt="5 sai lầm khi pha cà phê" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> 26/08/2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 5 phút đọc</span>
+                        </div>
+                        <h3 class="blog-title">5 sai lầm khiến ly cà phê mỗi sáng mất ngon mà nhiều người vẫn mắc phải</h3>
+                        <p class="blog-excerpt">Có những buổi sáng mở gói cà phê thơm phức nhưng pha ra lại bị đắng ngắt hoặc nhạt nhẽo. Cùng tìm hiểu nhiệt độ nước, độ mịn hạt và kỹ thuật ủ chuẩn để giữ trọn tinh chất.</p>
+                        <div class="blog-footer">
+                            <span>Đọc tiếp</span>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Bài 2 -->
+                <a href="#" class="blog-card">
+                    <div class="blog-img-wrap">
+                        <span class="blog-tag">Kiến thức hạt</span>
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2026/07/ChatGPT-Image-Jul-10-2026-01_16_01-PM-1-300x225.png" alt="Robusta hay Arabica" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> 15/08/2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 4 phút đọc</span>
+                        </div>
+                        <h3 class="blog-title">Người mới uống cà phê nên chọn Robusta hay Arabica để dễ hợp gu nhất?</h3>
+                        <p class="blog-excerpt">So sánh vị đắng đậm đà, hàm lượng caffeine dồi dào của Robusta Buôn Ma Thuột với hương hoa quả, chua thanh tao nhã của Arabica Cầu Đất giúp bạn chọn đúng dòng hạt yêu thích.</p>
+                        <div class="blog-footer">
+                            <span>Đọc tiếp</span>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Bài 3 -->
+                <a href="#" class="blog-card">
+                    <div class="blog-img-wrap">
+                        <span class="blog-tag">Cẩm nang rang xay</span>
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2026/03/ara-300x251.png" alt="Mức độ rang cà phê" loading="lazy">
+                    </div>
+                    <div class="blog-body">
+                        <div class="blog-meta">
+                            <span><i class="fa-regular fa-calendar"></i> 02/08/2026</span>
+                            <span><i class="fa-regular fa-clock"></i> 6 phút đọc</span>
+                        </div>
+                        <h3 class="blog-title">Mức độ rang cà phê khác nhau như thế nào cho cà phê pha máy và pha phin?</h3>
+                        <p class="blog-excerpt">Khám phá các cấp độ rang Light, Medium và Dark Roast. Vì sao máy pha Espresso cần mức rang vừa vặn còn phin truyền thống người Việt lại chuộng độ rang đậm sâu lắng?</p>
+                        <div class="blog-footer">
+                            <span>Đọc tiếp</span>
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 6. KHỐI ĐĂNG KÝ BẢN TIN NHẬN VOUCHER -->
+        <section class="newsletter-bar">
+            <div class="newsletter-text">
+                <h3><i class="fa-solid fa-gift"></i> Đăng Ký Nhận Ngay Voucher 50.000 ₫</h3>
+                <p>Nhận ngay mã giảm giá cho đơn hàng đầu tiên và thông tin ưu đãi cà phê mới nhất.</p>
+            </div>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Mã voucher đã được gửi qua email.');">
+                <input type="email" placeholder="Nhập địa chỉ email của bạn..." required>
+                <button type="submit">Đăng ký ngay</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- ==============================================================
+         7. FOOTER CHÂN TRANG ĐẸP CHUẨN THƯƠNG HIỆU VẠN LỘC COFFEE & TEA
+         ============================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                
+                <!-- Cột 1: Thông tin công ty & Định vị thương hiệu -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="https://vanloccoffee.com/wp-content/uploads/2024/12/Logo-Vanloc.png" alt="Vạn Lộc Coffee & Tea">
+                        <div>
+                            <h3>VẠN LỘC</h3>
+                            <span>Coffee & Tea</span>
+                        </div>
+                    </div>
+                    <p class="footer-about">
+                        <strong>Công ty TNHH SX TM Vạn Lộc</strong> là đơn vị hàng đầu trong lĩnh vực cung cấp Cà Phê sạch - Cà Phê nguyên chất rang mộc công nghệ Hot-Air và Trà Xanh Tân Cương cao cấp.
+                    </p>
+                    <div class="company-meta">
+                        <div><i class="fa-solid fa-id-card"></i> MST: <strong>0318719727</strong></div>
+                        <div><i class="fa-solid fa-certificate"></i> Chứng nhận ATTP số: <strong>3458/2024/BQLATTP</strong></div>
+                    </div>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="mailto:vanloccoffee@gmail.com" class="footer-social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                        <a href="tel:0967918897" class="footer-social-btn" title="Hotline"><i class="fa-solid fa-phone"></i></a>
+                        <a href="#" class="footer-social-btn" title="Zalo"><i class="fa-solid fa-comment-dots"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cột 2: Liên kết nhanh -->
+                <div class="footer-col">
+                    <h4>Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Trang chủ</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Giới thiệu thương hiệu</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Cửa hàng cà phê & trà</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Dành cho đối tác & đại lý sỉ</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Góc tư vấn & kiến thức pha chế</a></li>
+                        <li><a href="#"><i class="fa-solid fa-angle-right"></i> Chính sách đổi trả & bảo mật</a></li>
+                    </ul>
+                </div>
+
+                <!-- Cột 3: Giờ mở cửa & Liên hệ -->
+                <div class="footer-col">
+                    <h4>Giờ Mở Cửa & Hotline</h4>
+                    <div class="hours-badge">
+                        <p><i class="fa-regular fa-clock"></i> <strong>Thời gian hoạt động:</strong></p>
+                        <span>Thứ 2 - Thứ 7: <strong>8:00 - 20:00</strong></span>
+                        <span>Chủ nhật: <strong>Nghỉ (OFF)</strong></span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-phone-volume"></i>
+                        <div>
+                            <span>Hotline tư vấn / Zalo:</span>
+                            <div><a href="tel:0967918897"><strong>0967.918.897</strong></a></div>
+                        </div>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <span>Email liên hệ:</span>
+                            <div><a href="mailto:vanloccoffee@gmail.com"><strong>vanloccoffee@gmail.com</strong></a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cột 4: Bản đồ vị trí tại địa chỉ -->
+                <div class="footer-col">
+                    <h4>Vị Trí & Bản Đồ</h4>
+                    <div class="footer-contact-item" style="margin-bottom: 12px;">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <span>Địa chỉ trụ sở:</span>
+                            <div style="color: #ffffff; font-weight: 500;">134/37 Dương Thị Mười, P. Tân Thới Hiệp, Q. 12, TP. Hồ Chí Minh</div>
+                        </div>
+                    </div>
+                    <!-- Khung bản đồ Google Maps tương tác trực tiếp -->
+                    <div class="map-wrapper">
+                        <iframe class="map-iframe" 
+                            src="https://maps.google.com/maps?q=134%2F37+D%C6%B0%C6%A1ng+Th%E1%BB%8B+M%C6%B0%E1%BB%9Di%2C+T%C3%A2n+Th%E1%BB%9Bi+Hi%E1%BB%87p%2C+Qu%E1%BA%ADn+12%2C+Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade" 
+                            title="Bản đồ vị trí Vạn Lộc Coffee & Tea">
+                        </iframe>
+                        <div class="map-card-info">
+                            <div class="map-card-text">
+                                <strong>Vạn Lộc Coffee & Tea</strong>
+                                <span>134/37 Dương Thị Mười, Quận 12</span>
+                            </div>
+                            <a href="https://maps.google.com/?q=134/37+Dương+Thị+Mười,+Tân+Thới+Hiệp,+Quận+12,+Thành+phố+Hồ+Chí+Minh" target="_blank" rel="noopener noreferrer" class="map-direct-btn">
+                                <i class="fa-solid fa-diamond-turn-right"></i> Chỉ đường
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dòng bản quyền & chứng nhận cuối trang -->
+            <div class="footer-bottom">
+                <div>
+                    Cải tiến trang web &copy; <strong>Công ty TNHH SX TM Vạn Lộc</strong>. Tất cả quyền được bảo lưu.
+                </div>
+                <div class="footer-bottom-badges">
+                    <span class="footer-badge-item"><i class="fa-solid fa-shield-halved"></i> 100% Cà phê nguyên chất</span>
+                    <span class="footer-badge-item"><i class="fa-solid fa-award"></i> Chuẩn ATTP</span>
+                    <span class="footer-badge-item"><i class="fa-solid fa-truck-fast"></i> Giao hàng toàn quốc</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT TƯƠNG TÁC -->
+    <script>
+        // 1. Đồng hồ đếm ngược Flash Sale
+        let totalSeconds = 4 * 3600 + 32 * 60 + 45;
+        setInterval(() => {
+            if (totalSeconds > 0) {
+                totalSeconds--;
+                let h = Math.floor(totalSeconds / 3600);
+                let m = Math.floor((totalSeconds % 3600) / 60);
+                let s = totalSeconds % 60;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
+        }, 1000);
+
+        // 2. Thêm nhanh vào giỏ hàng
+        let cartItems = 2;
+        function addToCart(productName) {
+            cartItems++;
+            document.getElementById('cartCount').innerText = cartItems;
+            alert('✓ Đã thêm [' + productName + '] vào giỏ hàng thành công!');
+        }
+    </script>
+</body>
+</html>
